@@ -16,7 +16,6 @@ rawBooks.forEach((rawBook) => {
 function App() {
 	const [imagesAreShowing, setImagesAreShowing] = useState(true);
 	const [books, setBooks] = useState(_books);
-	const [totalLikes, setTotalLikes] = useState(0);
 
 	const handleImageToggle = () => {
 		setImagesAreShowing(!imagesAreShowing);
@@ -27,8 +26,8 @@ function App() {
 			<h1>Book Site</h1>
 			<button onClick={() => handleImageToggle()}>Toggle Images</button>
 			<h2>There are {books.length} books:</h2>
-			<div className="totalLikes">Total likes: {totalLikes}</div>
-			<Books books={books} setBooks={setBooks} totalLikes={totalLikes} setTotalLikes={setTotalLikes} imagesAreShowing={imagesAreShowing} />
+			<div className="totalLikes">Total likes: {books.reduce((total, book) => total + (book.liked ? 1 : 0), 0)}</div>
+			<Books books={books} setBooks={setBooks} imagesAreShowing={imagesAreShowing} />
 		</div>
 	);
 }

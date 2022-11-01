@@ -1,5 +1,4 @@
 import { IBook } from '../interfaces';
-import { IconContext } from 'react-icons';
 import { AiOutlineStar } from 'react-icons/ai';
 import { AiFillStar } from 'react-icons/ai';
 
@@ -8,21 +7,14 @@ interface IProps {
 	setBooks: any;
 	book: IBook;
 	imagesAreShowing: boolean;
-	setTotalLikes: any;
-	totalLikes: number;
 }
 
 export const Book = (props: IProps) => {
-	const { books, setBooks, book, imagesAreShowing, setTotalLikes, totalLikes } = props;
+	const { books, setBooks, book, imagesAreShowing, } = props;
 
 	const handleStarClick = (book: IBook) => {
 		book.liked = !book.liked;
 		setBooks([...books]);
-		if (book.liked) {
-			setTotalLikes(totalLikes + 1);
-		} else {
-			setTotalLikes(totalLikes - 1);
-		}
 	};
 
 	return (
