@@ -1,10 +1,21 @@
 import { useState } from 'react';
 import './App.scss';
-import books from './data/books.json';
 import { Books } from './components/Books';
+import rawBooks from './data/books.json';
+import { IBook } from './interfaces';
+
+const _books: IBook[] = [];
+rawBooks.forEach((rawBook) => {
+	const book: IBook = {
+		...rawBook,
+		liked: false,
+	};
+	_books.push(book);
+});
 
 function App() {
 	const [imagesAreShowing, setImagesAreShowing] = useState(true);
+	const [books, setBooks] = useState(_books);
 
 	const handleImageToggle = () => {
 		setImagesAreShowing(!imagesAreShowing);
@@ -15,7 +26,7 @@ function App() {
 			<h1>Book Site</h1>
 			<button onClick={() => handleImageToggle()}>Toggle Images</button>
 			<h2>There are {books.length} books:</h2>
-			<Books books={books} imagesAreShowing={imagesAreShowing} />
+			<Books books={books} setBooks={setBooks} imagesAreShowing={imagesAreShowing} />
 		</div>
 	);
 }
